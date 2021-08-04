@@ -17,17 +17,16 @@ vector<Adv> ListAds(const AdList& ads) {
     vector<Adv> advs;
     advs.clear();
     for (int i = 0; i < ads.ad_size(); i++) {
-        const Ad ad = ads.ad(i);
+        const Ad& ad = ads.ad(i);
         unsigned long long id = ad.aid();
         string op;
-        vector<unsigned long long> values;
-        values.clear();
         string field_name;
         bool reverse;
         vector<Predicate> preds;
         preds.clear();
         for (int j = 0; j < ad.target_item_size(); j++) {
             field_name = ad.target_item(j).field_name();
+            vector<unsigned long long> values;
             for (int k = 0; k < ad.target_item(j).value_size(); k++) {
                 values.push_back(ad.target_item(j).value(k));
             }
