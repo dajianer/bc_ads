@@ -16,7 +16,7 @@
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 #include <google/protobuf/text_format.h>
 
-void sub_ad(vector<Adv> &advs) {
+void sub_ad(vector<Adv> &advs, const char *path) {
     // 处理一个小广告的数据集，方便调试
     AdList adlist;
     for (int i = 0; i < 100; i++) {
@@ -49,9 +49,15 @@ void sub_ad(vector<Adv> &advs) {
                 item -> add_value(val);
             }
         }
+    }
+    fstream output(argv[3], ios::out | ios::trunc | ios::binary);
+    if (!adlist.SerializeToOstream(&output)) {
+        cerr << "Failed to write ad." << endl;
+        exit(1);
+    }
 }
 
-void sub_user(vector<UserInfo> userList) {
+void sub_user(vector<UserInfo> userInfos, const char* path) {
     // 处理一个小的用户数据集
     UserList userList;
     for (int i = 0; i < 10; i++) {
@@ -61,17 +67,17 @@ void sub_user(vector<UserInfo> userList) {
         vector<Feature> temp_feature = userInfos[i].get_features();
         for (int j = 0; j < temp_feature.size(); j++) {
             item -> set_field_name(temp_feature[j].get_field_name());
-            vector<unsigned long long> temp_value = temp_feature[j].get_values();
+            unsigned long long temp_value = temp_feature[j].get_value();
             for (int k = 0; k < temp_value.size(); k++) {
                 google::protobuf::int64 val = temp_value[k];
                 item -> add_value(val);
             }
         }
     }
-    fstream output1(argv[4], ios::out | ios::trunc | ios::binary);
+    fstream output1(path, ios::out | ios::trunc | ios::binary);
     if (!userList.SerializeToOstream(&output1)) {
         cerr << "Failed to write user." << endl;
-        return -1;
+        exit(1);
     }
     output1.close();
 }
