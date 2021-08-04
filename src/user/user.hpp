@@ -7,36 +7,36 @@
 class Feature{
     private:
         std::string field_name_;
-        unsigned long long values_;
+        unsigned long long value_;
     
     public:
         Feature(){ }
-        Feature(std::string field_name, unsigned long long values)
-        :field_name_(field_name), values_(values){ }
+        Feature(std::string field_name, unsigned long long value)
+        :field_name_(field_name), value_(value){ }
         ~Feature(){ }
 
         void set_field_name(std::string field_name);
-        void set_value(unsigned long long values);
+        void set_value(unsigned long long value);
         void insert_value(unsigned long long value);
 
         const std::string get_field_name() const;
-        const std::vector<unsigned long long> get_values() const;
+        const unsigned long long get_value() const;
 };
 
 void Feature::set_field_name(std::string field_name){
     field_name_ = field_name;
 }
+
 void Feature::set_value(unsigned long long values){
-    values_ = values;
+    value_ = values;
 }
-void Feature::insert_value(unsigned long long value){
-    values_.push_back(value);
-}
+
 const std::string Feature::get_field_name() const{
     return field_name_;
 }
-const std::vector<unsigned long long> Feature::get_values() const{
-    return values_;
+
+const unsigned long long Feature::get_value() const{
+    return value_;
 }
 
 class UserInfo{

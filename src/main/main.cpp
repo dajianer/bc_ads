@@ -5,10 +5,10 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <cstdint>
-#include "ad.pb.h"
-#include "advertising.hpp"
-#include "user.pb.h"
-#include "user.hpp"
+#include "../pb/ad.pb.h"
+#include "../ad/advertising.hpp"
+#include "../pb/user.pb.h"
+#include "../user/user.hpp"
 #include <google/protobuf/io/coded_stream.h>
 #include<google/protobuf/io/zero_copy_stream_impl.h>
 #include<google/protobuf/text_format.h>
@@ -68,11 +68,11 @@ vector<UserInfo> ListUsers (UserList users) {
         for (int j = 0; j < user.feture_item_size(); j++) {
             FeatureItem item = user.feture_item(j);
             string field_name = item.field_name();
-            vector<unsigned long long> values;
-            for (int k = 0; k < item.value_size(); k++) {
-                values.push_back(item.value(k));
+            unsigned long long value;
+            if (item.value_size() != 0) {
+                value = item.value(0);
+                features.push_back(Feature(field_name, value));
             }
-            features.push_back(Feature(field_name, values));
         }
         userInfos.push_back(UserInfo(id, features));
     }
@@ -123,10 +123,8 @@ int main(int argc, char **argv) {
         vector<Feature> temp_feature = userInfos[i].get_features();
         for (int j = 0; j < temp_feature.size(); j++) {
             std::cout << "field_name: " << temp_feature[j].get_field_name() << '\n';
-            vector<unsigned long long> temp_value = temp_feature[j].get_values();
-            for (int k = 0; k < temp_value.size(); k++) {
-                std::cout << "value: " << temp_value[k] << '\n'; 
-            }
+            unsigned long long temp_value = temp_feature[j].get_value();
+            std::cout << "temp_value: " << temp_value << '\n';
         }
     }
 
