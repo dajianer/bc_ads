@@ -16,7 +16,7 @@ class Feature{
         ~Feature(){ }
 
         void set_field_name(std::string field_name);
-        void set_value(unsigned long long values);
+        void set_value(std::vector<unsigned long long>& values);
         void insert_value(unsigned long long value);
 
         const std::string get_field_name() const;
