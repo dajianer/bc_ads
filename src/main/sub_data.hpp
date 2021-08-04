@@ -50,11 +50,12 @@ void sub_ad(vector<Adv> &advs, const char *path) {
             }
         }
     }
-    fstream output(argv[3], ios::out | ios::trunc | ios::binary);
+    fstream output(path, ios::out | ios::trunc | ios::binary);
     if (!adlist.SerializeToOstream(&output)) {
         cerr << "Failed to write ad." << endl;
         exit(1);
     }
+    output.close();
 }
 
 void sub_user(vector<UserInfo> userInfos, const char* path) {
@@ -68,10 +69,7 @@ void sub_user(vector<UserInfo> userInfos, const char* path) {
         for (int j = 0; j < temp_feature.size(); j++) {
             item -> set_field_name(temp_feature[j].get_field_name());
             unsigned long long temp_value = temp_feature[j].get_value();
-            for (int k = 0; k < temp_value.size(); k++) {
-                google::protobuf::int64 val = temp_value[k];
-                item -> add_value(val);
-            }
+            item -> add_value(temp_value);
         }
     }
     fstream output1(path, ios::out | ios::trunc | ios::binary);
