@@ -15,7 +15,6 @@
 
 vector<Adv> ListAds(const AdList& ads) {
     vector<Adv> advs;
-    advs.clear();
     for (int i = 0; i < ads.ad_size(); i++) {
         const Ad& ad = ads.ad(i);
         unsigned long long id = ad.aid();
@@ -23,7 +22,6 @@ vector<Adv> ListAds(const AdList& ads) {
         string field_name;
         bool reverse;
         vector<Predicate> preds;
-        preds.clear();
         for (int j = 0; j < ad.target_item_size(); j++) {
             field_name = ad.target_item(j).field_name();
             vector<unsigned long long> values;
@@ -33,17 +31,23 @@ vector<Adv> ListAds(const AdList& ads) {
             reverse = ad.target_item(j).reverse();
             switch (ad.target_item(j).op()) {
                 case AdTargetOperator::IN:
-                    op = "IN"; break;
+                    op = "IN";
+                    break;
                 case AdTargetOperator::GT:
-                    op = "GT";break;
+                    op = "GT";
+                    break;
                 case AdTargetOperator::LT:
-                    op = "LT";break;
+                    op = "LT";
+                    break;
                 case AdTargetOperator::BETWEEN:
-                    op = "BETWEEN";break;
+                    op = "BETWEEN";
+                    break;
                 case AdTargetOperator::DistanceLT:
-                    op = "DistanceLT";break;
+                    op = "DistanceLT";
+                    break;
                 case AdTargetOperator::GTE:
-                    op = "GTE";break;
+                    op = "GTE";
+                    break;
                 case AdTargetOperator::LTE:
                     op = "LTE";
             }
@@ -51,24 +55,20 @@ vector<Adv> ListAds(const AdList& ads) {
         }
         advs.push_back(Adv(id, preds));
     }
-    cout << advs.size() << '\n';
     return advs;
 }
 
 
 vector<UserInfo> ListUsers (UserList users) {
     vector<UserInfo> userInfos;
-    userInfos.clear();
     for (int i = 0; i < users.user_size(); i++) {
         User user = users.user(i);
         string id = user.user_id();
         vector<Feature> features;
-        features.clear();
         for (int j = 0; j < user.feture_item_size(); j++) {
             FeatureItem item = user.feture_item(j);
             string field_name = item.field_name();
             vector<unsigned long long> values;
-            values.clear();
             for (int k = 0; k < item.value_size(); k++) {
                 values.push_back(item.value(k));
             }
@@ -80,12 +80,11 @@ vector<UserInfo> ListUsers (UserList users) {
 }
 
 int main(int argc, char **argv) {
-    // if (argc != 3) {
-    //     std::cerr << "Usage: " << argv[0] << " ADDRESS_BOOL_FILE" << std::endl;
-    //     return -1;
-    // }
+    if (argc != 3) {
+        std::cerr << "Usage: " << argv[0] << " ADDRESS_BOOL_FILE" << std::endl;
+        return -1;
+    }
     // 解析广告数据
-    cout << "--------------------ad--------------\n";
     AdList ads;
 
     fstream input(argv[1], ios::in | ios::binary);
@@ -110,7 +109,6 @@ int main(int argc, char **argv) {
     }
 
     // 解析用户数据
-    std::cout << "------------------user-------------------\n";
     UserList users;
 
     fstream input1(argv[2], ios::in | ios::binary);
