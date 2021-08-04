@@ -5,9 +5,10 @@ using Boolean Indexing and Bitmap scheme. Then we evaluate our method on the dat
 
 ### Compile 
 
-
-
-
+cd src
+make
 
 ### Usage
+
+./src/build/runit
 
