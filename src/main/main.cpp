@@ -1,11 +1,11 @@
-#include "../pb/ad.pb.h"
 #include "../ad/advertising.hpp"
+#include "../pb/ad.pb.h"
 #include "../pb/user.pb.h"
 #include "../user/user.hpp"
 #include "read_data.hpp"
 #include "sub_data.hpp"
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     if (argc != 3) {
         std::cerr << "Usage: " << argv[0] << " ADDRESS_BOOL_FILE" << std::endl;
         return -1;
@@ -25,10 +25,11 @@ int main(int argc, char **argv) {
     //     std::cout << "aid: " << advs[i].get_id() << "\n";
     //     vector<Predicate> temp_preds = advs[i].get_preds();
     //     for (int j = 0; j < temp_preds.size(); j++) {
-    //         std::cout << "field_name: " << temp_preds[j].get_field_name() << '\n';
-    //         std::cout << "reverse: " << temp_preds[j].get_reverse() << '\n';
-    //         vector<unsigned long long> temp_value = temp_preds[j].get_values();
-    //         for (int k = 0; k < temp_value.size(); k++) {
+    //         std::cout << "field_name: " << temp_preds[j].get_field_name() <<
+    //         '\n'; std::cout << "reverse: " << temp_preds[j].get_reverse() <<
+    //         '\n'; vector<unsigned long long> temp_value =
+    //         temp_preds[j].get_values(); for (int k = 0; k <
+    //         temp_value.size(); k++) {
     //             std::cout << "value: " << temp_value[k] << '\n';
     //         }
     //     }
@@ -48,9 +49,10 @@ int main(int argc, char **argv) {
     //     std::cout << "user_id: " << userInfos[i].get_user_id() << '\n';
     //     vector<Feature> temp_feature = userInfos[i].get_features();
     //     for (int j = 0; j < temp_feature.size(); j++) {
-    //         std::cout << "field_name: " << temp_feature[j].get_field_name() << '\n';
-    //         unsigned long long temp_value = temp_feature[j].get_value();
-    //         std::cout << "temp_value: " << temp_value << '\n';
+    //         std::cout << "field_name: " << temp_feature[j].get_field_name()
+    //         << '\n'; unsigned long long temp_value =
+    //         temp_feature[j].get_value(); std::cout << "temp_value: " <<
+    //         temp_value << '\n';
     //     }
     // }
 
@@ -58,6 +60,6 @@ int main(int argc, char **argv) {
     // sub_user(userInfos, argv[4]);
 
     google::protobuf::ShutdownProtobufLibrary();
-    
+
     return 0;
 }
