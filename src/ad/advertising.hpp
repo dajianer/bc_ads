@@ -10,25 +10,26 @@ class Predicate{
         string op_;
         bool reverse_;
         string field_name_;
-        vector<unsigned long long> values_;
+        vector<string> values_;
+        // string 
 
     public:
         // methods
         Predicate() { }
-        Predicate(string op, bool reverse, string field_name, vector<unsigned long long>& value):
+        Predicate(string op, bool reverse, string field_name, vector<string>& value):
             op_(op), reverse_(reverse), field_name_(field_name), values_(value){ }
         ~Predicate( ) { }
 
         void set_op(string op);
         void set_reverse(bool reverse);
         void set_field_name(string field_name);
-        void set_value(vector<unsigned long long> values);
-        void insert_value(unsigned long long value);
+        void set_value(vector<string> values);
+        void insert_value(string value);
         
         const string get_op() const;
         const bool get_reverse() const;
         const string get_field_name() const;
-        const vector<unsigned long long> get_values() const;
+        const vector<string> get_values() const;
 
 };
 
@@ -40,7 +41,7 @@ void Predicate::set_reverse(bool reverse) {
     reverse_ = reverse;
 }
 
-void Predicate::set_value(vector<unsigned long long> values) {
+void Predicate::set_value(vector<string> values) {
     values_ = values;
 }
 
@@ -48,7 +49,7 @@ void Predicate::set_field_name(string field_name) {
     field_name_ = field_name;
 }
 
-void Predicate::insert_value(unsigned long long value) {
+void Predicate::insert_value(string value) {
     values_.push_back(value);
 }
 
@@ -64,7 +65,7 @@ const string Predicate::get_field_name() const {
     return field_name_;
 }
 
-const vector<unsigned long long> Predicate::get_values() const {
+const vector<string> Predicate::get_values() const {
     return values_;
 }
 
