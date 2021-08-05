@@ -160,7 +160,6 @@ void Kth_Ad::Bitmap_init() {
             /*将所有<predicate,value>的rev_attr反转后，
             位为1的
             直接&运算
-
             */
         }
     }

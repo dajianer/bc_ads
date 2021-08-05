@@ -7,27 +7,27 @@
 class Feature{
     private:
         std::string field_name_;
-        unsigned long long value_;
+        string value_;
     
     public:
         Feature(){ }
-        Feature(std::string field_name, unsigned long long value)
+        Feature(std::string field_name, string value)
         :field_name_(field_name), value_(value){ }
         ~Feature(){ }
 
         void set_field_name(std::string field_name);
-        void set_value(unsigned long long value);
-        void insert_value(unsigned long long value);
+        void set_value(string value);
+        void insert_value(string value);
 
         const std::string get_field_name() const;
-        const unsigned long long get_value() const;
+        const string get_value() const;
 };
 
 void Feature::set_field_name(std::string field_name){
     field_name_ = field_name;
 }
 
-void Feature::set_value(unsigned long long values){
+void Feature::set_value(string values){
     value_ = values;
 }
 
@@ -35,7 +35,7 @@ const std::string Feature::get_field_name() const{
     return field_name_;
 }
 
-const unsigned long long Feature::get_value() const{
+const string Feature::get_value() const{
     return value_;
 }
 

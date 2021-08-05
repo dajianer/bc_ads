@@ -27,9 +27,9 @@ vector<Adv> ListAds(const AdList& ads) {
         vector<Predicate> preds;
         for (int j = 0; j < ad.target_item_size(); j++) {
             field_name = ad.target_item(j).field_name();
-            vector<unsigned long long> values;
+            vector<string> values;
             for (int k = 0; k < ad.target_item(j).value_size(); k++) {
-                values.push_back(ad.target_item(j).value(k));
+                values.push_back(to_string(ad.target_item(j).value(k)));
             }
             reverse = ad.target_item(j).reverse();
             switch (ad.target_item(j).op()) {
@@ -74,7 +74,7 @@ vector<UserInfo> ListUsers (UserList users) {
             unsigned long long value;
             if (item.value_size() != 0) {
                 value = item.value(0);
-                features.push_back(Feature(field_name, value));
+                features.push_back(Feature(field_name, to_string(value)));
             }
         }
         userInfos.push_back(UserInfo(id, features));
